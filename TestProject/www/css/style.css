@@ -1,0 +1,44 @@
+/* Empty. Add your own CSS if you like */
+.hiddenArea {
+	display: none;
+}
+
+#mainArea {
+	text-align: center;
+	padding: 10px;
+	width: 100%;
+	height: 100%;
+}
+
+#frontPage, #secondPage {
+	width: 100%;
+	height: 100%;
+}
+
+#contactList {
+	text-align: center;
+}
+
+table, th, td {
+    border: 1px solid black;
+	width: 100%;
+}
+
+tr {
+	height: 10px;
+}
+
+button {
+	width: 100%;
+	height: 100%;
+}
+
+form {
+	height: 80%;
+	width: 90%;
+}
+
+#submit {
+	width: 60%;
+	height: 15%;
+}
