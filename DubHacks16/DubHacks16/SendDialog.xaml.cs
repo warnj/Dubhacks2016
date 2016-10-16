@@ -88,8 +88,7 @@ namespace DubHacks16 {
     }
 
     private void send(object sender, EventArgs e) {
-            sendEmail("warnj@outlook.com", input.Text);
-            sendEmail("5099490962@email.uscc.net", input.Text);
+            
             DialogResult = true;
         }
 
@@ -99,12 +98,12 @@ namespace DubHacks16 {
 
 
         private void sendEmail(string to, string text) {
-            MailMessage mail = new MailMessage("warnj3@gmail.com", to);
+            
             mail.Body = "text";
             SmtpClient client = new SmtpClient();
             client.Port = 587;
             client.EnableSsl = true;
-            client.Credentials = new NetworkCredential("warnj3@gmail.com", "Cessn@70");
+            
             client.Host = "smtp.gmail.com";
             client.SendMailAsync(mail);
         }
