@@ -55,7 +55,7 @@ namespace DubHacks16
 
         private void searchChanged(object sender, TextChangedEventArgs e) {
             if (contacts.SelectedIndex < 0) contacts.SelectedIndex = 0;
-            for (int i = contacts.SelectedIndex; i < contactList.Count; i++) {
+            for (int i = 0; i < contactList.Count; i++) {
                 if(((String)(contactList[i])).StartsWith(((TextBox)sender).Text)) {
                     contacts.SelectedIndex = i;
                     break;
