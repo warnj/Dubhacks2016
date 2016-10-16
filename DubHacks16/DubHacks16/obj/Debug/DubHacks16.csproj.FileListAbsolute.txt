@@ -20,3 +20,6 @@ D:\Documents\Programming\dubhack2016\DubHacks16\DubHacks16\bin\Debug\Facebook.xm
 D:\Documents\Programming\dubhack2016\DubHacks16\DubHacks16\bin\Debug\Hammock.ClientProfile.pdb
 D:\Documents\Programming\dubhack2016\DubHacks16\DubHacks16\bin\Debug\Newtonsoft.Json.xml
 D:\Documents\Programming\dubhack2016\DubHacks16\DubHacks16\bin\Debug\TweetSharp.pdb
+D:\Documents\Programming\dubhack2016\DubHacks16\DubHacks16\obj\Debug\DubHacks16.csproj.ResolveComReference.cache
+D:\Documents\Programming\dubhack2016\DubHacks16\DubHacks16\obj\Debug\SendDialog.g.cs
+D:\Documents\Programming\dubhack2016\DubHacks16\DubHacks16\obj\Debug\SendDialog.baml

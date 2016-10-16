@@ -5,23 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DubHacks16"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <Button Click ="SendEmail" Margin="331,67,89,225">Email</Button>
-        <Button Click ="SendText" Margin="73,67,347,225">Text</Button>
-        <TextBox   Name="emailTxt" Margin="276,10,10,275"></TextBox>
-        <TextBox   x:Name="phoneTxt" Margin="10,10,276,275"/>
-        <ComboBox Name="carriers" Margin="10,101,276,191" SelectedIndex="5">
-            <ComboBoxItem>Altel</ComboBoxItem>
-            <ComboBoxItem>AT&amp;T</ComboBoxItem>
-            <ComboBoxItem>Boost Mobile</ComboBoxItem>
-            <ComboBoxItem>Sprint</ComboBoxItem>
-            <ComboBoxItem>T-Mobile</ComboBoxItem>
-            <ComboBoxItem>U.S. Cellular</ComboBoxItem>
-            <ComboBoxItem>Verizon</ComboBoxItem>
-            <ComboBoxItem>Virgin Mobile</ComboBoxItem>
-        </ComboBox>
+        Title="Contact Now" Height="650" Width="525" ResizeMode="NoResize">
+    <Grid Background="#FF2943B6" >
 
-        <Button Click="showFacebook" Margin="30,247,384,45">Facebook</Button>
+        <TextBox Name="searchBox" TextChanged="searchChanged" Margin="244,10,36,582"></TextBox>
+
+
+            <Label Content="Contacts" HorizontalAlignment="Left" Height="33" VerticalAlignment="Top" Width="215" Foreground="White" FontWeight="Bold" FontSize="18.667" Canvas.Left="21" Canvas.Top="8" Margin="10,0,0,0"/>
+
+
+        <ListBox x:Name="contacts" Margin="10,38,10,10" MouseDoubleClick="doubleClick"/>
+
+
     </Grid>
+
 </Window>

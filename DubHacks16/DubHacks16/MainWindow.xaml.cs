@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,8 +16,11 @@ using System.Windows.Shapes;
 using System.Net.Mail;
 using System.Net;
 using Facebook;
+using System.Dynamic;
 using TweetSharp;
-
+using Microsoft.Office.Interop.Outlook;
+using System.Diagnostics;
+using System.Device;
 
 
 // http://www.digitaltrends.com/computing/how-to-send-free-text-messages-online/
@@ -28,66 +32,60 @@ namespace DubHacks16
     /// </summary>
     public partial class MainWindow : Window
     {
+        public ArrayList contactList = new ArrayList();
+        public Microsoft.Office.Interop.Outlook.Items OutlookItems;
+
         public MainWindow()
         {
             InitializeComponent();
-            phoneTxt.Text = "5099490962";
-            emailTxt.Text = "warnj@outlook.com";
+            importContacts();
+            contacts.ItemsSource = contactList;
+            searchBox.Focus();
         }
 
-        public void SendText(object sender, EventArgs e)
-        {
-            if(carriers.SelectedIndex == 0) {
-                sendEmail(phoneTxt.Text.Trim() + "@sms.alltelwireless.com", "body");
-            } else if (carriers.SelectedIndex == 1) {
-                sendEmail(phoneTxt.Text.Trim() + "@txt.att.net", "body");
-            } else if (carriers.SelectedIndex == 2) {
-                sendEmail(phoneTxt.Text.Trim() + "@sms.myboostmobile.com", "body");
-            } else if (carriers.SelectedIndex == 3) {
-                sendEmail(phoneTxt.Text.Trim() + "@messaging.sprintpcs.com", "body");
-            } else if (carriers.SelectedIndex == 4) {
-                sendEmail("1" + phoneTxt.Text.Trim() + "@tmomail.net", "body");
-            } else if (carriers.SelectedIndex == 5) {
-                sendEmail(phoneTxt.Text.Trim() + "@email.uscc.net", "body");
-            } else if (carriers.SelectedIndex == 6) {
-                sendEmail(phoneTxt.Text.Trim() + "@vtext.com", "body");
-            } else if (carriers.SelectedIndex == 7) {
-                sendEmail(phoneTxt.Text.Trim() + "@vmobl.com", "body");
+        private void doubleClick(object sender, EventArgs e) {
+            if(contacts.SelectedIndex > 0) {
+                var d = new SendDialog(OutlookItems, contacts.SelectedIndex);
+                if(d.ShowDialog() == true) {
+
+                }
+            }
+
+        }
+
+        private void searchChanged(object sender, TextChangedEventArgs e) {
+            if (contacts.SelectedIndex < 0) contacts.SelectedIndex = 0;
+            for (int i = contacts.SelectedIndex; i < contactList.Count; i++) {
+                if(((String)(contactList[i])).StartsWith(((TextBox)sender).Text)) {
+                    contacts.SelectedIndex = i;
+                    break;
+                }
             }
         }
 
 
+        private void importContacts() {
+            
+            Microsoft.Office.Interop.Outlook.Application outlookObj = new Microsoft.Office.Interop.Outlook.Application();
+            MAPIFolder Folder_Contacts;
+            Folder_Contacts = (MAPIFolder)outlookObj.Session.GetDefaultFolder(OlDefaultFolders.olFolderContacts);
+            OutlookItems = Folder_Contacts.Items;
+            //Trace.WriteLine("num contacts: " + OutlookItems.Count.ToString());
 
-        public void SendEmail(object sender, EventArgs e)
-        {
-            sendEmail(emailTxt.Text.Trim(), "body");
+            for (int i = 0; i < OutlookItems.Count; i++) {
+                Microsoft.Office.Interop.Outlook.ContactItem contact = (Microsoft.Office.Interop.Outlook.ContactItem)OutlookItems[i + 1];
+                contactList.Add(contact.FullName);
+                //Trace.WriteLine("NAME: " + contact.FullName);
+                //Trace.WriteLine("Company: " + contact.CompanyName);
+                //Trace.WriteLine("Business: " + contact.BusinessAddressStreet);
+                //Trace.WriteLine("postal and city: " + contact.BusinessAddressPostalCode + " " + contact.BusinessAddressCity);
+                //Trace.WriteLine("email: " + contact.Email1Address);
+
+            }
+            contactList.Sort();
         }
 
-        private void sendEmail(string to, string text) {
-            MailMessage mail = new MailMessage("warnj3@gmail.com", to);
-            mail.Body = "text";
-            SmtpClient client = new SmtpClient();
-            client.Port = 587;
-            client.EnableSsl = true;
-            client.Credentials = new NetworkCredential("warnj3@gmail.com", "Cessn@70");
-            client.Host = "smtp.gmail.com";
-            client.SendMailAsync(mail);
-        }
-
-        public void showFacebook(object sender, EventArgs e) {
-            //FacebookAPI fbApi = new FacebookAPI();
-            //JSONObject codesamplezObject = fbApi.Get("/106181569450743");
-            //String companyOverview = codesamplezObject.Dictionary["company_overview"].String;
-
-            //var twitter = FluentTwitter.CreateRequest()
-            //.AuthenticateAs("USERNAME", "PASSWORD")
-            //.Statuses().Update("Hello World!")
-            //.AsJson();
-
-            //var response = twitter.Request();
-
-
-        }
+        
 
 
     }
